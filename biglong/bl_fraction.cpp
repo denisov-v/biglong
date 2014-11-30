@@ -22,11 +22,14 @@ namespace blong
 		bin_str = bin_str.substr(b - shift);
 
 		double frac_part = 0;
-		unsigned int d = 2;
-		for (size_t i = 0; i < std::min(bin_str.length(), sizeof(unsigned int) * 8 - 1); ++i, d <<= 1)
+		double d = 2;
+		size_t precision = 56U;
+		for (size_t i = 0; i < std::min(bin_str.length(), precision); ++i, d *= 2)
+		{
 			if (bin_str[i] == '1')
-				frac_part += 1 / static_cast<double>(d);		
-		
+				frac_part += 1 / d;
+		}
+
 		return frac_part;
 	}
 }
